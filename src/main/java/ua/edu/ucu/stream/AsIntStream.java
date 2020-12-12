@@ -72,8 +72,8 @@ public class AsIntStream implements IntStream {
             }
         }
         int[] finalResult = new int[newSize];
-        if (newSize >= 0) {
-            System.arraycopy(result, 0, finalResult, 0, newSize);
+        for (int i = 0; i < newSize; i++) {
+            finalResult[i] = result[i];
         }
         return new AsIntStream(finalResult);
     }
