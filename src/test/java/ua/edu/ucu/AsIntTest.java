@@ -29,4 +29,18 @@ public class AsIntTest {
         double result = intStream.average();
         assertEquals(expResult, result, 0.00001);
     }
+
+    @Test
+    public void testAsIntStreamMax() {
+        int expResult = 3;
+        int result = intStream.max();
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testAsIntStreamMin() {
+        int expResult = -1;
+        int result = intStream.min();
+        assertEquals(expResult, result);
+    }
 }

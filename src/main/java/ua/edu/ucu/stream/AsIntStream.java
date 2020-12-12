@@ -1,8 +1,10 @@
 package ua.edu.ucu.stream;
 
-import ua.edu.ucu.function.*;
-
-import java.util.ArrayList;
+import ua.edu.ucu.function.IntBinaryOperator;
+import ua.edu.ucu.function.IntConsumer;
+import ua.edu.ucu.function.IntPredicate;
+import ua.edu.ucu.function.IntToIntStreamFunction;
+import ua.edu.ucu.function.IntUnaryOperator;
 
 import static java.lang.Integer.compare;
 
@@ -33,7 +35,7 @@ public class AsIntStream implements IntStream {
 
     @Override
     public Double average() {
-        return (double) (sum() / count());
+        return sum() / (double) count();
     }
 
     private Integer maxOrMin(int sign) {
@@ -70,7 +72,9 @@ public class AsIntStream implements IntStream {
             }
         }
         int[] finalResult = new int[newSize];
-        if (newSize >= 0) System.arraycopy(result, 0, finalResult, 0, newSize);
+        if (newSize >= 0) {
+            System.arraycopy(result, 0, finalResult, 0, newSize);
+        }
         return new AsIntStream(finalResult);
     }
 
@@ -117,6 +121,6 @@ public class AsIntStream implements IntStream {
 
     @Override
     public int[] toArray() {
-        return integerArray;
+        return integerArray.clone();
     }
 }
