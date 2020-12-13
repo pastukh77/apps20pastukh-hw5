@@ -6,10 +6,14 @@ import ua.edu.ucu.function.IntPredicate;
 import ua.edu.ucu.function.IntToIntStreamFunction;
 import ua.edu.ucu.function.IntUnaryOperator;
 
-import static java.lang.Integer.compare;
-
 public class AsIntStream implements IntStream {
     private final int[] integerArray;
+
+    private void checkIllegalArg() {
+        if (integerArray.length == 0) {
+            throw new IllegalArgumentException();
+        }
+    }
 
     private AsIntStream(int... values) {
         integerArray = values;
@@ -21,6 +25,7 @@ public class AsIntStream implements IntStream {
 
     @Override
     public Integer sum() {
+        checkIllegalArg();
         int sum = 0;
         for (int val : integerArray) {
             sum += val;
@@ -30,6 +35,7 @@ public class AsIntStream implements IntStream {
 
     @Override
     public long count() {
+        checkIllegalArg();
         return integerArray.length;
     }
 
@@ -39,10 +45,11 @@ public class AsIntStream implements IntStream {
     }
 
     private Integer maxOrMin(int sign) {
+        checkIllegalArg();
         int current = integerArray[0];
         for (int i = 0; i < count() - 1; i++) {
             int next = integerArray[i + 1];
-            if (sign * compare(current, next) < 0) {
+            if (sign * Integer.compare(current, next) < 0) {
                 current = next;
             }
         }
